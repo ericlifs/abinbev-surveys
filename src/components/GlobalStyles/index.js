@@ -6,7 +6,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
-    background-color: #046cd5;
+    background-color: ${({ theme }) => theme.colors.scienceBlue};
   }
 `
 
