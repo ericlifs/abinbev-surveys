@@ -5,6 +5,7 @@ import theme from './config/theme';
 
 import GlobalStyles from './components/GlobalStyles';
 import Header from './components/Header';
+import FileUploader from './components/FileUploader';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Header />
+        <FileUploader />
       </ThemeProvider>
     </div>
   );
