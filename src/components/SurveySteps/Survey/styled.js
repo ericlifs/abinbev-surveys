@@ -1,10 +1,8 @@
 import styled from 'styled-components'
 
 export const SurveyWrapper = styled.form`
-  display: flex;
-  flex-direction: column;
-  max-width: 40vw;
-  margin: 40px auto;
+  display: grid;
+  grid-template-columns: .6fr .4fr;
 `;
 
 export const SubmitButton = styled.input`
@@ -15,3 +13,8 @@ export const SubmitButton = styled.input`
   padding: 10px 24px;
   border-radius: 6px;
 `;
+
+export const SurveyColumn = styled.div`
+  background-color: ${({ theme, code }) => code ? theme.colors.gallery : theme.colors.white };
+  padding: 40px;
+`
