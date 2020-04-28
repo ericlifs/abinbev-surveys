@@ -9,8 +9,9 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.biscay };
   }
 
-  input {
+  * {
     font-family: 'Raleway', sans-serif;
+    box-sizing: border-box;
   }
 `
 
