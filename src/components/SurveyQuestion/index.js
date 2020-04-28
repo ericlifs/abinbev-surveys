@@ -5,7 +5,9 @@ import INPUT_TYPES from 'config/inputTypes';
 import TextQuestion from './TextQuestion';
 import OptionQuestion from './OptionQuestion';
 
-export default function SurveyQuestion({ question, onAnswerChange }) {
+import { ErrorMessage } from './styled';
+
+export default function SurveyQuestion({ question, onAnswerChange, error }) {
   const getContentByQuestionType = () => {
     switch (question.type) {
       case INPUT_TYPES.TEXT:
@@ -24,6 +26,7 @@ export default function SurveyQuestion({ question, onAnswerChange }) {
     <>
       <h3>{question.title}</h3>
       {getContentByQuestionType()}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </>
   )
 }

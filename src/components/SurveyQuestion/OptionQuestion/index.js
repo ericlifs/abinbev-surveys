@@ -21,7 +21,7 @@ export default function OptionQuestion({ question, onChange }) {
     const newValue = isMultiple ? computeMultipleOptionsValue(ev.target.value) : ev.target.value;
     
     setValues(newValue);
-    onChange(question.name, newValue);
+    onChange(question, newValue);
   }
 
   return question.answers.map(answer => (

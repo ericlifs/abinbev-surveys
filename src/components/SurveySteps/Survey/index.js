@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 
-import { SurveyWrapper, SubmitButton, SurveyColumn, ResetButton } from './styled'
+import VALIDATORS from 'helpers/validators';
 
 import SurveyQuestion from 'components/SurveyQuestion';
 
+import { SurveyWrapper, SubmitButton, SurveyColumn, ResetButton } from './styled'
+
 export default function({ survey, onFormSubmit, onSurveyReset }) {
   const [values, setValues] = useState({});
+  const [errors, setErrors] = useState({});
 
   const onSubmit = ev => {
     ev.preventDefault();
@@ -13,13 +16,28 @@ export default function({ survey, onFormSubmit, onSurveyReset }) {
     onFormSubmit(values);
   }
 
-  const onFieldChange = (field, value) => {
-    const newFormValues = {
-      ...values,
-      [field]: value,
+  const validate = (question, value) => {
+    const invalid = question.validators.find(validator => !VALIDATORS[validator].validate(value));
+
+    const newFormErrors = {
+      ...errors,
+      [question.name]: invalid ? VALIDATORS[invalid].message : '',
     };
 
-    setValues(newFormValues)
+    setErrors(newFormErrors);
+  }
+
+  const onFieldChange = (question, value) => {
+    const newFormValues = {
+      ...values,
+      [question.name]: value,
+    };
+
+    setValues(newFormValues);
+
+    if (question.validators) {
+      validate(question, value);
+    }
   }
 
   return (
@@ -27,7 +45,12 @@ export default function({ survey, onFormSubmit, onSurveyReset }) {
       <SurveyColumn>
         {survey.title && <h2>{survey.title}</h2>}
         {(survey.questions || []).map(question => (
-          <SurveyQuestion key={question.name} question={question} onAnswerChange={onFieldChange} />
+          <SurveyQuestion
+            key={question.name}
+            question={question}
+            onAnswerChange={onFieldChange}
+            error={errors[question.name]}
+          />
         ))}
         <SubmitButton type="submit" value="Submit" />
         <ResetButton as="button" onClick={onSurveyReset}>Reset</ResetButton>
@@ -35,6 +58,9 @@ export default function({ survey, onFormSubmit, onSurveyReset }) {
       <SurveyColumn code>
         <h2>Current values</h2>
         <pre>{JSON.stringify(values, undefined, 2)}</pre>
+
+        <h2>Current errors</h2>
+        <pre>{JSON.stringify(errors, undefined, 2)}</pre>
       </SurveyColumn>
     </SurveyWrapper>
   )
