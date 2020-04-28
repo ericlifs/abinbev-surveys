@@ -21,7 +21,7 @@ export default function({ survey, onFormSubmit, onSurveyReset }) {
     });
 
     setErrors(newErrorsState);
-  }, []);
+  }, [survey, values]);
 
   const isFormValid = () => {
     const errorsMessages = Object.values(errors);
