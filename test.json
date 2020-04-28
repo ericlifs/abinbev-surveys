@@ -1,0 +1,30 @@
+{
+  "title": "Hello!",
+  "questions": [
+    {
+      "title": "Whats 2 + 2",
+      "name": "field1",
+      "type": "TEXT",
+      "validators": ["NOT_EMPTY"]
+    },
+    {
+      "title": "Your email",
+      "name": "email",
+      "type": "TEXT",
+      "validators": ["NOT_EMPTY", "EMAIL"]
+    },
+    {
+      "title": "dasdsadasd",
+      "name": "field3",
+      "type": "SINGLE_OPTION",
+      "validators": ["NOT_EMPTY"],
+      "answers": ["daad", "rerere", "xzcxzcx"]
+    },
+    {
+      "title": "This question can have more than 1 answers",
+      "name": "field4",
+      "type": "MULTIPLE_OPTION",
+      "answers": ["1", "2", "3", "4"]
+    }
+  ]
+}
