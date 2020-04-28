@@ -26,7 +26,7 @@ export default function({ survey, onFormSubmit, onSurveyReset }) {
   const isFormValid = () => {
     const errorsMessages = Object.values(errors);
 
-    return errorsMessages.every(value => value.trim() === '');
+    return errorsMessages.every(value => !value || value.trim() === '');
   }
 
   const onFieldChange = (question, value) => {
