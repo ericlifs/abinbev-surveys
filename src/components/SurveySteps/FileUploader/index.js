@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 
 import { validateFileExtension, readContentFromFile } from 'helpers/file';
+import { toggleWithTimeout } from 'helpers/functions';
 
 import FlashMessage, { MESSAGES_TYPES } from 'components/FlashMessage';
 
@@ -10,20 +11,12 @@ export default function({ onUpload }) {
   const inputEl = useRef(null);
   const [error, setError] = useState(false);
 
-  const showFlashError = () => {
-    setError(true);
-
-    setTimeout(() => {
-      setError(false);
-    }, 4000);
-  }
-
   const onFileRead = content => {
     try {
       const parsedFile = JSON.parse(content)
       onUpload(parsedFile);
     } catch (err) {
-      showFlashError();
+      toggleWithTimeout(setError, true);
     }
   }
 
