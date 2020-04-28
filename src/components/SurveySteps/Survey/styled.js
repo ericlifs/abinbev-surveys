@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const SurveyWrapper = styled.form`
-  display: grid;
-  grid-template-columns: .6fr .4fr;
+  display: flex;
+  flex: 1;
 `;
 
 export const SubmitButton = styled.input`
@@ -18,6 +18,12 @@ export const SubmitButton = styled.input`
 export const SurveyColumn = styled.div`
   background-color: ${({ theme, code }) => code ? theme.colors.gallery : theme.colors.white };
   padding: 40px;
+  flex-grow: 1;
+
+  ${({ code }) => code && `
+    width: 400px;
+    flex-grow: 0;
+  `}
 `
 
 export const ResetButton = styled(SubmitButton)`
@@ -27,3 +33,8 @@ export const ResetButton = styled(SubmitButton)`
 `
 
 export const Title = styled.h2``
+
+export const Code = styled.pre`
+  white-space: pre-wrap;
+  word-wrap: break-word;
+`

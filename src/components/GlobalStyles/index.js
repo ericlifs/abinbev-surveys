@@ -9,6 +9,12 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.biscay };
   }
 
+  #root {
+    flex-direction: column;
+    min-height: 100vh;
+    display: flex;
+  }
+
   * {
     font-family: 'Raleway', sans-serif;
     box-sizing: border-box;

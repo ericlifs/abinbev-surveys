@@ -4,7 +4,7 @@ import validateField from 'helpers/validators';
 
 import SurveyQuestion from 'components/SurveyQuestion';
 
-import { SurveyWrapper, SubmitButton, SurveyColumn, ResetButton, Title } from './styled'
+import { SurveyWrapper, SubmitButton, SurveyColumn, ResetButton, Title, Code } from './styled'
 
 export default function({ survey, onFormSubmit, onSurveyReset }) {
   const [values, setValues] = useState({});
@@ -74,11 +74,11 @@ export default function({ survey, onFormSubmit, onSurveyReset }) {
       </SurveyColumn>
       <SurveyColumn code>
         <Title>Current values</Title>
-        <pre>{JSON.stringify(values, undefined, 2)}</pre>
+        <Code>{JSON.stringify(values, undefined, 2)}</Code>
 
         <Title>Current errors</Title>
-        <pre>{JSON.stringify(errors, undefined, 2)}</pre>
-        <Title as="h5">Errors are shown upon form submit</Title>
+        <Code>{JSON.stringify(errors, undefined, 2)}</Code>
+        <Title as="h5">(Errors are shown upon form submit)</Title>
       </SurveyColumn>
     </SurveyWrapper>
   )
