@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const SubmittingLoader = styled.div`
-  background: rgba(0, 0, 0, .8);
+  background: ${({ theme }) => theme.colors.black}90;
   color: ${({ theme }) => theme.colors.white };
   position: fixed;
   height: 100%;

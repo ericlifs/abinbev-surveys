@@ -6,5 +6,6 @@ export default {
     gallery: '#efefef',
     redOrange: '#f8353e',
     japaneseLaurel: '#07ad00',
+    black: '#000000',
   },
 }
