@@ -8,6 +8,10 @@ const GlobalStyles = createGlobalStyle`
     font-size: 16px;
     color: ${({ theme }) => theme.colors.biscay };
   }
+
+  input {
+    font-family: 'Raleway', sans-serif;
+  }
 `
 
 export default GlobalStyles;
