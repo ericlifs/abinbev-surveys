@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import { SurveyWrapper, SubmitButton, SurveyColumn } from './styled'
+import { SurveyWrapper, SubmitButton, SurveyColumn, ResetButton } from './styled'
 
 import SurveyQuestion from 'components/SurveyQuestion';
 
-export default function({ survey, onFormSubmit }) {
+export default function({ survey, onFormSubmit, onSurveyReset }) {
   const [values, setValues] = useState({});
 
   const onSubmit = ev => {
@@ -30,6 +30,7 @@ export default function({ survey, onFormSubmit }) {
           <SurveyQuestion key={index} question={question} onAnswerChange={onFieldChange} />
         ))}
         <SubmitButton type="submit" value="Submit" />
+        <ResetButton as="button" onClick={onSurveyReset}>Reset</ResetButton>
       </SurveyColumn>
       <SurveyColumn code>
         <h2>Current values</h2>

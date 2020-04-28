@@ -22,9 +22,13 @@ export default function() {
     }, 5000);
   }
 
+  const onSurveyReset = () => {
+    setFileContent(null);
+  }
+
   return (
     <>
-      <Survey survey={fileContent} onFormSubmit={onFormSubmit}/>
+      <Survey survey={fileContent} onFormSubmit={onFormSubmit} onSurveyReset={onSurveyReset}/>
       {submitting && <SubmittingLoader>Submitting...</SubmittingLoader>}
     </>
   );

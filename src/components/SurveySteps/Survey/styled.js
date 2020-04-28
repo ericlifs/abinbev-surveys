@@ -12,9 +12,16 @@ export const SubmitButton = styled.input`
   margin-top: 20px;
   padding: 10px 24px;
   border-radius: 6px;
+  border: none;
 `;
 
 export const SurveyColumn = styled.div`
   background-color: ${({ theme, code }) => code ? theme.colors.gallery : theme.colors.white };
   padding: 40px;
+`
+
+export const ResetButton = styled(SubmitButton)`
+  background-color: ${({ theme }) => theme.colors.gallery};
+  color: ${({ theme }) => theme.colors.biscay };
+  margin-left: 20px;
 `
