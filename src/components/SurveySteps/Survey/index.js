@@ -9,15 +9,24 @@ import { SurveyWrapper, SubmitButton, SurveyColumn, ResetButton } from './styled
 export default function({ survey, onFormSubmit, onSurveyReset }) {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false)
 
-  const onSubmit = ev => {
-    ev.preventDefault();
+  const isFormValid = () => {
+    const errorsMessages = Object.values(errors);
 
-    onFormSubmit(values);
+    return errorsMessages.every(value => value.trim() === '');
   }
 
   const validate = (question, value) => {
-    const invalid = question.validators.find(validator => !VALIDATORS[validator].validate(value));
+    if (!question.validators) {
+      return;
+    }
+
+    const invalid = question.validators.find(validator => {
+      const validation = VALIDATORS[validator];
+
+      return validation ? !validation.validate(value) : false;
+    });
 
     const newFormErrors = {
       ...errors,
@@ -34,9 +43,16 @@ export default function({ survey, onFormSubmit, onSurveyReset }) {
     };
 
     setValues(newFormValues);
+    validate(question, value);
+  }
 
-    if (question.validators) {
-      validate(question, value);
+  const onSubmit = ev => {
+    ev.preventDefault();
+
+    setSubmitted(true);
+
+    if (isFormValid()) {
+      onFormSubmit(values);
     }
   }
 
@@ -48,8 +64,8 @@ export default function({ survey, onFormSubmit, onSurveyReset }) {
           <SurveyQuestion
             key={question.name}
             question={question}
+            error={submitted && errors[question.name]}
             onAnswerChange={onFieldChange}
-            error={errors[question.name]}
           />
         ))}
         <SubmitButton type="submit" value="Submit" />
