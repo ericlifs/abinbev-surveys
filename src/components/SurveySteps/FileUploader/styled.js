@@ -5,6 +5,7 @@ export const FileUploaderWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin: 40px 0;
+  flex-grow: 1;
 `;
 
 export const Title = styled.h3`
