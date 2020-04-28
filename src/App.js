@@ -9,12 +9,10 @@ import SurveySteps from 'components/SurveySteps';
 
 export default function App() {
   return (
-    <div className="App">
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <Header />
-        <SurveySteps />
-      </ThemeProvider>
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Header />
+      <SurveySteps />
+    </ThemeProvider>
   );
 }
