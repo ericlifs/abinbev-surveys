@@ -25,3 +25,5 @@ export const ResetButton = styled(SubmitButton)`
   color: ${({ theme }) => theme.colors.biscay };
   margin-left: 20px;
 `
+
+export const Title = styled.h2``

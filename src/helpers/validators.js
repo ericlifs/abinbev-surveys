@@ -5,7 +5,7 @@ const VALIDATIONS = {
 
 const EMAIL_REGEX = /\S+@\S+\.\S+/;
 
-const VALIDATORS = {
+export const VALIDATORS = {
   [VALIDATIONS.NOT_EMPTY]: {
     validate: value => value && value.trim() !== '',
     message: 'This field is required',
@@ -16,4 +16,18 @@ const VALIDATORS = {
   }
 };
 
-export default VALIDATORS;
+const validateField = (validators, value) => {
+  if (!validators) {
+    return;
+  }
+
+  const validationWithError = validators.find(validator => {
+    const validation = VALIDATORS[validator];
+
+    return validation ? !validation.validate(value) : false;
+  });
+
+  return validationWithError ? VALIDATORS[validationWithError].message : '';
+}
+
+export default validateField;

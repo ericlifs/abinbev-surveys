@@ -1,39 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import VALIDATORS from 'helpers/validators';
+import validateField from 'helpers/validators';
 
 import SurveyQuestion from 'components/SurveyQuestion';
 
-import { SurveyWrapper, SubmitButton, SurveyColumn, ResetButton } from './styled'
+import { SurveyWrapper, SubmitButton, SurveyColumn, ResetButton, Title } from './styled'
 
 export default function({ survey, onFormSubmit, onSurveyReset }) {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false)
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const newErrorsState = {};
+
+    survey.questions.forEach(question => {
+      const { name, validators } = question;
+
+      newErrorsState[name] = validateField(validators, values[name]);
+    });
+
+    setErrors(newErrorsState);
+  }, []);
 
   const isFormValid = () => {
     const errorsMessages = Object.values(errors);
 
     return errorsMessages.every(value => value.trim() === '');
-  }
-
-  const validate = (question, value) => {
-    if (!question.validators) {
-      return;
-    }
-
-    const invalid = question.validators.find(validator => {
-      const validation = VALIDATORS[validator];
-
-      return validation ? !validation.validate(value) : false;
-    });
-
-    const newFormErrors = {
-      ...errors,
-      [question.name]: invalid ? VALIDATORS[invalid].message : '',
-    };
-
-    setErrors(newFormErrors);
   }
 
   const onFieldChange = (question, value) => {
@@ -43,7 +36,15 @@ export default function({ survey, onFormSubmit, onSurveyReset }) {
     };
 
     setValues(newFormValues);
-    validate(question, value);
+
+    if (question.validators) {
+      const newFormErrors = {
+        ...errors,
+        [question.name]: validateField(question.validators, value),
+      };
+
+      setErrors(newFormErrors);
+    }
   }
 
   const onSubmit = ev => {
@@ -59,7 +60,7 @@ export default function({ survey, onFormSubmit, onSurveyReset }) {
   return (
     <SurveyWrapper onSubmit={onSubmit}>
       <SurveyColumn>
-        {survey.title && <h2>{survey.title}</h2>}
+        {survey.title && <Title>{survey.title}</Title>}
         {(survey.questions || []).map(question => (
           <SurveyQuestion
             key={question.name}
@@ -72,11 +73,12 @@ export default function({ survey, onFormSubmit, onSurveyReset }) {
         <ResetButton as="button" onClick={onSurveyReset}>Reset</ResetButton>
       </SurveyColumn>
       <SurveyColumn code>
-        <h2>Current values</h2>
+        <Title>Current values</Title>
         <pre>{JSON.stringify(values, undefined, 2)}</pre>
 
-        <h2>Current errors</h2>
+        <Title>Current errors</Title>
         <pre>{JSON.stringify(errors, undefined, 2)}</pre>
+        <Title as="h5">Errors are shown upon form submit</Title>
       </SurveyColumn>
     </SurveyWrapper>
   )
