@@ -8,7 +8,6 @@ export const FileUploaderWrapper = styled.div`
 `;
 
 export const Title = styled.h3`
-  color: ${({ theme }) => theme.colors.white };
 `;
 
 export const Input = styled.input`

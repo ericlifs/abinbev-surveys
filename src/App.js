@@ -5,7 +5,7 @@ import theme from 'config/theme';
 
 import GlobalStyles from 'components/GlobalStyles';
 import Header from 'components/Header';
-import FileUploader from 'components/FileUploader';
+import SurveySteps from 'components/SurveySteps';
 
 export default function App() {
   return (
@@ -13,7 +13,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Header />
-        <FileUploader />
+        <SurveySteps />
       </ThemeProvider>
     </div>
   );
