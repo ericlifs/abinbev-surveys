@@ -26,8 +26,8 @@ export default function({ survey, onFormSubmit, onSurveyReset }) {
     <SurveyWrapper onSubmit={onSubmit}>
       <SurveyColumn>
         {survey.title && <h2>{survey.title}</h2>}
-        {(survey.questions || []).map((question, index) => (
-          <SurveyQuestion key={index} question={question} onAnswerChange={onFieldChange} />
+        {(survey.questions || []).map(question => (
+          <SurveyQuestion key={question.name} question={question} onAnswerChange={onFieldChange} />
         ))}
         <SubmitButton type="submit" value="Submit" />
         <ResetButton as="button" onClick={onSurveyReset}>Reset</ResetButton>
