@@ -24,6 +24,7 @@
       "title": "This question can have more than 1 answers",
       "name": "field4",
       "type": "MULTIPLE_OPTION",
+      "validators": ["NOT_EMPTY"],
       "answers": ["1", "2", "3", "4"]
     }
   ]

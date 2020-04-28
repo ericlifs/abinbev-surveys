@@ -37,6 +37,8 @@ This app needs an external JSON file with the following structure to work:
 }
 ```
 
+You will find a `test.json` file on the repo's root which you can use as a test file.
+
 ### Question types
 #### TEXT
 This is a single input text field. It does not require an array of answers.

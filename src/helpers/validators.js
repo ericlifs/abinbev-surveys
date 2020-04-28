@@ -7,7 +7,13 @@ const EMAIL_REGEX = /\S+@\S+\.\S+/;
 
 export const VALIDATORS = {
   [VALIDATIONS.NOT_EMPTY]: {
-    validate: value => value && value.trim() !== '',
+    validate: value => {
+      if (Array.isArray(value)) {
+        return value.length;
+      }
+
+      return value && value.trim() !== '';
+    },
     message: 'This field is required',
   },
   [VALIDATIONS.EMAIL]: {
