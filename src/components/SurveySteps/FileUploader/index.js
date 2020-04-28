@@ -29,7 +29,7 @@ export default function({ onUpload }) {
     <FileUploaderWrapper>
       <Title>Start by selecting your external JSON survey file</Title>
       <Input onChange={onFileSelected} ref={inputEl} type="file" id="file" accept=".json" />
-      <InputLabel for="file">Choose your file</InputLabel>
+      <InputLabel htmlFor="file">Choose your file</InputLabel>
     </FileUploaderWrapper>
   )
 }

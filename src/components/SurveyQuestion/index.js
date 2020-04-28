@@ -17,7 +17,7 @@ export default function SurveyQuestion({ question }) {
         return question.answers.map(answer => (
           <CheckInputWrapper key={answer}>
             <CheckInput type={fieldType} id={answer} name={question.name} value={answer} />
-            <CheckInputLabel for={answer}>{answer}</CheckInputLabel>
+            <CheckInputLabel htmlFor={answer}>{answer}</CheckInputLabel>
           </CheckInputWrapper>
         ));
 
